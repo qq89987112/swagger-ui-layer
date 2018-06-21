@@ -5,6 +5,7 @@ $.views.converters("getResponseModelName", function(val) {
 
 var tempBody = $.templates('#temp_body');
 var tempBodyResponseModel = $.templates('#temp_body_response_model');
+var childrenTable = $.templates('#children-table');
 
 //获取context path
 var contextPath = getContextPath();
@@ -46,18 +47,28 @@ $(function(){
                         if(modelName){
                             var model = jsonData.definitions[modelName];
                             $("#path-body-response-model").html(tempBodyResponseModel.render(model));
-                            $("#path-body tr").on("click",function () {
+                            $("#path-body-response-model tr").each(function (i) {
                                 var $this = $(this);
-                                var prop = $this.find("td").eq(0).text();
+                                var prop = $this.find("td").eq(1).text();
+                                var items = model.properties[prop].items;
+                                if(items){
+                                    $this.addClass("has-children");
+                                }
+                            });
+                            $("#path-body-response-model tr").on("click",function () {
+                                var $this = $(this);
+                                var prop = $this.find("td").eq(1).text();
                                 var items = model.properties[prop].items;
                                 if(items&&(modelName = getResponseModelName(items.$ref))){
                                     if(this._after){
                                         this._after.remove();
                                         this._after = null;
+                                        $this.removeClass("active");
                                     }else{
-                                        this._after = $(tempBodyResponseModel.render(jsonData.definitions[modelName]));
+                                        this._after = $(childrenTable.render(jsonData.definitions[modelName]));
                                         this._after.addClass("children");
                                         $this.after(this._after);
+                                        $this.addClass("active");
                                     }
                                 }
                             });

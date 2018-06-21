@@ -13,8 +13,24 @@
     <link rel="stylesheet" type="text/css" href="webjars/css/global.css">
     <link rel="stylesheet" type="text/css" href="webjars/css/jquery.json-viewer.css">
     <style>
-        .children{
-            background-color: #f0f0f0;
+        .children-table{
+        }
+        .has-children{
+            cursor: pointer;
+        }
+        .arrow{
+            width: 15px;
+            height: 15px;
+            display: none;
+        }
+        .has-children .arrow{
+            display: inline-block;
+            cursor: pointer;
+            transition: transform .3s ease;
+            transform: rotate(90deg);
+        }
+        .has-children.active .arrow{
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -77,8 +93,10 @@
 <script id="temp_body" type="text/template">
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <!--<li class="layui-this"><span class="method {{:method}}" m_operationId ="{{:operationId}}" path="{{:path}}" method = "{{:method}}">{{:method}}</span>{{:path}}</li>-->
-            <li class="layui-this">{{:path}}</li>
+            <li class="layui-this">
+                <span style="display: none" class="method {{:method}}" m_operationId ="{{:operationId}}" path="{{:path}}" method = "{{:method}}">{{:method}}</span>
+                {{:path}}
+            </li>
             <li>Debug</li>
         </ul>
         <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0px 0px; height: 803px;">
@@ -146,6 +164,7 @@
                 <table class="layui-table">
                     <thead>
                     <tr>
+                        <th style="width: 1em"></th>
                         <th>Properties</th>
                         <th>Type</th>
                         <th>Description</th>
@@ -222,11 +241,40 @@
 <script id="temp_body_response_model" type="text/template">
     {{props properties}}
     <tr>
+        <td style="text-align: center">
+            <svg t="1529572309809" class="arrow" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1978" data-spm-anchor-id="a313x.7781069.0.i2" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M490.982 376.236c-12.499-12.499-12.499-32.755 0-45.253v0c12.499-12.499 32.755-12.499 45.253 0l316.781 316.781c12.499 12.499 12.499 32.755 0 45.253v0c-12.499 12.499-32.755 12.499-45.25300001 0l-316.78099999-316.781z" fill="#666666" p-id="1979" data-spm-anchor-id="a313x.7781069.0.i0" class="selected"></path><path d="M216.23700001 693.017c-12.499 12.499-32.755 12.499-45.25300001 0v0c-12.499-12.499-12.499-32.755 0-45.253l316.781-316.781c12.499-12.499 32.755-12.499 45.253 0v0c12.499 12.499 12.499 32.755 0 45.253l-316.78099999 316.781z" fill="#666666" p-id="1980"></path></svg>
+        </td>
         <td>{{:key}}</td>
         <td>{{:prop.type}}</td>
         <td>{{:prop.description}}</td>
     </tr>
     {{/props}}
+</script>
+
+<script id="children-table" type="text/template">
+    <tr>
+        <td colspan="4">
+            <table class="layui-table children-table">
+                <thead>
+                <tr>
+                    <th>Properties</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{props properties}}
+                <tr>
+                    <td>{{:key}}</td>
+                    <td>{{:prop.type}}</td>
+                    <td>{{:prop.description}}</td>
+                </tr>
+                {{/props}}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
 </script>
 </body>
 <script src="webjars/layui/layui.js"></script>

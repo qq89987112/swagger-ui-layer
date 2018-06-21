@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "快易销-沁园DMS数据接口平台",
+    "description": "数据接口平台",
     "version": "1.0.0",
-    "title": "快易销开放API",
+    "title": "开放API",
     "termsOfService": "https://oksales.net"
   },
   "host": "a.posun.cn:8902",
