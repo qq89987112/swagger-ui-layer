@@ -1,0 +1,696 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "快易销-沁园DMS数据接口平台",
+    "version": "1.0.0",
+    "title": "快易销开放API",
+    "termsOfService": "https://oksales.net"
+  },
+  "host": "a.posun.cn:8902",
+  "basePath": "/openapi",
+  "tags": [
+    {
+      "name": "主数据",
+      "description": "Master Data Controller"
+    },
+    {
+      "name": "进销存",
+      "description": "Scm Data Controller"
+    }
+  ],
+  "paths": {
+    "/masterData/product/list": {
+      "get": {
+        "tags": [
+          "主数据"
+        ],
+        "summary": "商品列表",
+        "description": "获取产品列表，如果页码不传，则查询所有记录",
+        "operationId": "productListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appKey",
+            "in": "header",
+            "description": "系统分配的APP_KEY",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "当前时间戳，精确到毫秒",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "授权token，在登录后返回",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "header",
+            "description": "将 appKey + secret + timestamp + token 进行MD5 32位加密后 转换为大写 得出的字符串",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，起始值为1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«product»»"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "主数据"
+        ],
+        "summary": "商品列表",
+        "description": "获取产品列表，如果页码不传，则查询所有记录",
+        "operationId": "saveProductUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appKey",
+            "in": "header",
+            "description": "系统分配的APP_KEY",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "当前时间戳，精确到毫秒",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "授权token，在登录后返回",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "header",
+            "description": "将 appKey + secret + timestamp + token 进行MD5 32位加密后 转换为大写 得出的字符串",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，起始值为1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«product»»"
+            }
+          }
+        }
+      }
+    },
+    "/masterData/store/list": {
+      "get": {
+        "tags": [
+          "主数据"
+        ],
+        "summary": "门店列表",
+        "description": "获取门店列表，如果页码不传，则查询所有记录",
+        "operationId": "storeListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appKey",
+            "in": "header",
+            "description": "系统分配的APP_KEY",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "当前时间戳，精确到毫秒",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "授权token，在登录后返回",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "header",
+            "description": "将 appKey + secret + timestamp + token 进行MD5 32位加密后 转换为大写 得出的字符串",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，起始值为1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/scm/other/list": {
+      "get": {
+        "tags": [
+          "进销存"
+        ],
+        "summary": "其他出入库明细列表",
+        "description": "获取指定时间段的其他出入库明细列表，如果页码不传，则查询所有记录",
+        "operationId": "otherOrderListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appKey",
+            "in": "header",
+            "description": "系统分配的APP_KEY",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "当前时间戳，精确到毫秒",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "授权token，在登录后返回",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "header",
+            "description": "将 appKey + secret + timestamp + token 进行MD5 32位加密后 转换为大写 得出的字符串",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "开始日期",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "结束日期",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，起始值为1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List»"
+            }
+          }
+        }
+      }
+    },
+    "/scm/purchase/list": {
+      "get": {
+        "tags": [
+          "进销存"
+        ],
+        "summary": "采购明细列表",
+        "description": "获取指定时间段的采购明细列表，如果页码不传，则查询所有记录",
+        "operationId": "purchaseListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appKey",
+            "in": "header",
+            "description": "系统分配的APP_KEY",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "当前时间戳，精确到毫秒",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "授权token，在登录后返回",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "header",
+            "description": "将 appKey + secret + timestamp + token 进行MD5 32位加密后 转换为大写 得出的字符串",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "开始日期",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "结束日期",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，起始值为1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List»"
+            }
+          }
+        }
+      }
+    },
+    "/scm/sales/list": {
+      "get": {
+        "tags": [
+          "进销存"
+        ],
+        "summary": "销售明细列表",
+        "description": "获取指定时间段的销售明细列表，如果页码不传，则查询所有记录",
+        "operationId": "salesListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appKey",
+            "in": "header",
+            "description": "系统分配的APP_KEY",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "当前时间戳，精确到毫秒",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "授权token，在登录后返回",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "header",
+            "description": "将 appKey + secret + timestamp + token 进行MD5 32位加密后 转换为大写 得出的字符串",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "开始日期",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "结束日期",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，起始值为1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List»"
+            }
+          }
+        }
+      }
+    },
+    "/scm/stock/list": {
+      "get": {
+        "tags": [
+          "进销存"
+        ],
+        "summary": "即时库存列表",
+        "description": "获取即时库存列表，如果页码不传，则查询所有记录",
+        "operationId": "stockListUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appKey",
+            "in": "header",
+            "description": "系统分配的APP_KEY",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "header",
+            "description": "当前时间戳，精确到毫秒",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "授权token，在登录后返回",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sign",
+            "in": "header",
+            "description": "将 appKey + secret + timestamp + token 进行MD5 32位加密后 转换为大写 得出的字符串",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "warehouseId",
+            "in": "query",
+            "description": "指定仓库编码",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，起始值为1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "每页记录数",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List»"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Result": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "状态码",
+          "allowEmptyValue": false
+        },
+        "data": {
+          "type": "object",
+          "description": "数据",
+          "allowEmptyValue": false
+        },
+        "msg": {
+          "type": "string",
+          "description": "提示信息",
+          "allowEmptyValue": false
+        },
+        "status": {
+          "type": "boolean",
+          "example": false,
+          "description": "状态",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Result",
+      "description": "结果"
+    },
+    "Result«List«product»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "状态码",
+          "allowEmptyValue": false
+        },
+        "data": {
+          "type": "array",
+          "description": "数据",
+          "allowEmptyValue": false,
+          "items": {
+            "$ref": "#/definitions/product"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "提示信息",
+          "allowEmptyValue": false
+        },
+        "status": {
+          "type": "boolean",
+          "example": false,
+          "description": "状态",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Result«List«product»»",
+      "description": "结果"
+    },
+    "Result«List»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "状态码",
+          "allowEmptyValue": false
+        },
+        "data": {
+          "type": "array",
+          "description": "数据",
+          "allowEmptyValue": false,
+          "items": {
+            "type": "object"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "提示信息",
+          "allowEmptyValue": false
+        },
+        "status": {
+          "type": "boolean",
+          "example": false,
+          "description": "状态",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "Result«List»",
+      "description": "结果"
+    },
+    "product": {
+      "type": "object",
+      "properties": {
+        "prodBarCode": {
+          "type": "string",
+          "description": "条形码",
+          "allowEmptyValue": false
+        },
+        "prodCode": {
+          "type": "string",
+          "description": "产品编码",
+          "allowEmptyValue": false
+        },
+        "prodName": {
+          "type": "string",
+          "description": "产品名称",
+          "allowEmptyValue": false
+        },
+        "prodSpec": {
+          "type": "string",
+          "description": "规格型号",
+          "allowEmptyValue": false
+        },
+        "prodUnit": {
+          "type": "string",
+          "description": "计量单位",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "product",
+      "description": "产品模型"
+    }
+  }
+}
